@@ -5,14 +5,14 @@
 //  Created by Hubert Kuszyński on 23/04/2026.
 //
 
-import SwiftUI
 import os
+import SwiftUI
 
 struct SettingsView: View, Logging {
     @State private var viewModel = SettingsStore()
-    
+
     var workout = Workout(name: "Test workout")
-    
+
     var body: some View {
         NavigationView {
             List {

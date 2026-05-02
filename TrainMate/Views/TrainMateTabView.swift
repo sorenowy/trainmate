@@ -1,5 +1,5 @@
 //
-//  TabView.swift
+//  TrainMateTabView.swift
 //  TrainMate
 //
 //  Created by Hubert Kuszyński on 22/04/2026.
@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TrainMateTabView: View {
     var body: some View {
-        TabView{
+        TabView {
             Tab("Home", systemImage: "house.fill") {
                 NavigationStack {
                     DashboardView()
@@ -25,8 +25,8 @@ struct TrainMateTabView: View {
                     SettingsView()
                 }
             }
-            
         }
+        .tint(Color.primaryColor)
     }
 }
 

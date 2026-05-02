@@ -10,6 +10,7 @@ import SwiftUI
 struct MainView: View {
     var body: some View {
         TrainMateTabView()
+            .tint(Color.primaryColor)
     }
 }
 

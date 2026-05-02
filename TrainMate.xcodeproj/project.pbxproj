@@ -27,10 +27,13 @@
 		2B64863C2F98AD4F0035CE44 /* TrainMate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrainMate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B64864D2F98AD500035CE44 /* TrainMateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrainMateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B6486572F98AD500035CE44 /* TrainMateUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrainMateUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BFE11042FA6225D0038EAA9 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		2BFE11262FA626250038EAA9 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		2BFE11342FA649540038EAA9 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		2B64865F2F98AD500035CE44 /* Exceptions for "TrainMate" folder in "TrainMate" target */ = {
+		2BFE11372FA64D960038EAA9 /* Exceptions for "TrainMate" folder in "TrainMate" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -43,7 +46,7 @@
 		2B64863E2F98AD4F0035CE44 /* TrainMate */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				2B64865F2F98AD500035CE44 /* Exceptions for "TrainMate" folder in "TrainMate" target */,
+				2BFE11372FA64D960038EAA9 /* Exceptions for "TrainMate" folder in "TrainMate" target */,
 			);
 			path = TrainMate;
 			sourceTree = "<group>";
@@ -92,6 +95,9 @@
 				2B6486502F98AD500035CE44 /* TrainMateTests */,
 				2B64865A2F98AD500035CE44 /* TrainMateUITests */,
 				2B64863D2F98AD4F0035CE44 /* Products */,
+				2BFE11262FA626250038EAA9 /* Makefile */,
+				2BFE11042FA6225D0038EAA9 /* .swiftlint.yml */,
+				2BFE11342FA649540038EAA9 /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -119,6 +125,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				2BFE11252FA625F50038EAA9 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				2B64863E2F98AD4F0035CE44 /* TrainMate */,
@@ -208,6 +215,10 @@
 			);
 			mainGroup = 2B6486332F98AD4F0035CE44;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				2B86F72F2FA61AE000BE3980 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
+				2BFE11282FA643490038EAA9 /* XCRemoteSwiftPackageReference "SwiftFormat" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 2B64863D2F98AD4F0035CE44 /* Products */;
 			projectDirPath = "";
@@ -278,6 +289,10 @@
 			isa = PBXTargetDependency;
 			target = 2B64863B2F98AD4F0035CE44 /* TrainMate */;
 			targetProxy = 2B6486582F98AD500035CE44 /* PBXContainerItemProxy */;
+		};
+		2BFE11252FA625F50038EAA9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 2BFE11242FA625F50038EAA9 /* SwiftLintBuildToolPlugin */;
 		};
 /* End PBXTargetDependency section */
 
@@ -593,6 +608,33 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2B86F72F2FA61AE000BE3980 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SimplyDanny/SwiftLintPlugins";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.63.2;
+			};
+		};
+		2BFE11282FA643490038EAA9 /* XCRemoteSwiftPackageReference "SwiftFormat" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nicklockwood/SwiftFormat";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.61.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2BFE11242FA625F50038EAA9 /* SwiftLintBuildToolPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2B86F72F2FA61AE000BE3980 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */;
+			productName = "plugin:SwiftLintBuildToolPlugin";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2B6486342F98AD4F0035CE44 /* Project object */;
 }

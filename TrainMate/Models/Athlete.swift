@@ -11,8 +11,17 @@ class Athlete {
     var weight: Double = 0.0 // kilograms
     var height: Double = 0.0 // centimeters
     var birthDate: Date = Date()
-    
-    init(name: String = "", hrMax: Int = 220, hrResting: Int = 70, ftp: Int = 0, runningThresholdPace: Double = 0.0, weight: Double = 0.0, height: Double = 0.0, birthDate: Date) {
+
+    init(
+        name: String = "",
+        hrMax: Int = 220,
+        hrResting: Int = 70,
+        ftp: Int = 0,
+        runningThresholdPace: Double = 0.0,
+        weight: Double = 0.0,
+        height: Double = 0.0,
+        birthDate: Date = Date()
+    ) {
         self.name = name
         self.hrMax = hrMax
         self.hrResting = hrResting

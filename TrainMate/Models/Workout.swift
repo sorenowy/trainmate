@@ -7,7 +7,7 @@ class Workout: Identifiable {
     var name: String = ""
     var duration: TimeInterval = 0
     var isCompleted: Bool = false
-    
+
     init(id: UUID = UUID(), name: String = "", duration: TimeInterval = 0, isCompleted: Bool = false) {
         self.id = id
         self.name = name
