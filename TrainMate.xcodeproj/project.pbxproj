@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		2BFE113B2FA79B880038EAA9 /* .swiftformat in Resources */ = {isa = PBXBuildFile; fileRef = 2BFE113A2FA79B880038EAA9 /* .swiftformat */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		2B64864E2F98AD500035CE44 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -30,6 +34,7 @@
 		2BFE11042FA6225D0038EAA9 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		2BFE11262FA626250038EAA9 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		2BFE11342FA649540038EAA9 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		2BFE113A2FA79B880038EAA9 /* .swiftformat */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftformat; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -96,6 +101,7 @@
 				2B64865A2F98AD500035CE44 /* TrainMateUITests */,
 				2B64863D2F98AD4F0035CE44 /* Products */,
 				2BFE11262FA626250038EAA9 /* Makefile */,
+				2BFE113A2FA79B880038EAA9 /* .swiftformat */,
 				2BFE11042FA6225D0038EAA9 /* .swiftlint.yml */,
 				2BFE11342FA649540038EAA9 /* README.md */,
 			);
@@ -236,6 +242,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BFE113B2FA79B880038EAA9 /* .swiftformat in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

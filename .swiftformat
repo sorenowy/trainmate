@@ -1,0 +1,3 @@
+--maxwidth 120
+--disable trailingCommas
+--disable redundantSelf
