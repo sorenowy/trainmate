@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct DashboardView: View {
+    @Environment(AppRouter.self) private var router
+    
     private let userName: String = "Hubert"
 
     var body: some View {
@@ -38,8 +40,8 @@ struct DashboardView: View {
                 Text("1235")
                     .font(.tmMetricSmall)
 
-                NavigationLink(destination: EmptyView()) {
-                    Text("TEST")
+                Button("Navigate to some view"){
+                    router.navigate(to: .athleteProfile)
                 }
             }
             .navigationTitle("Hello, \(userName)!")
@@ -54,4 +56,5 @@ struct DashboardView: View {
 
 #Preview {
     DashboardView()
+        .environment(AppRouter())
 }

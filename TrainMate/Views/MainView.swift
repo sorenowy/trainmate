@@ -18,7 +18,7 @@ struct MainView: View {
     var body: some View {
         if athlete != nil {
             // TODO: If going with iPadOS/macOS, there we shift towards other UI
-            TrainMateTabView()
+            RootTabView()
                 .tint(Color.primaryColor)
         } else {
             OnboardingView()

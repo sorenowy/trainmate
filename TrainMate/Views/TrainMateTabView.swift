@@ -7,29 +7,37 @@
 
 import SwiftUI
 
-struct TrainMateTabView: View {
+struct RootTabView: View {
+    @State private var router = AppRouter()
+    
     var body: some View {
-        TabView {
-            Tab("Home", systemImage: "house.fill") {
-                NavigationStack {
+        TabView(selection: $router.selectedTab) {
+            Tab("Home", systemImage: "house.fill", value: .dashboard) {
+                AppCoordinatorView(path: $router.dashboardPath) {
                     DashboardView()
                 }
             }
-            Tab("Workout", systemImage: "figure.strengthtraining.functional.circle.fill") {
-                NavigationStack {
+            Tab("Workout", systemImage: "figure.strengthtraining.functional.circle.fill", value: .dashboard) {
+                AppCoordinatorView(path: $router.workoutPath) {
                     WorkoutView()
                 }
             }
-            Tab("Settings", systemImage: "gearshape.fill") {
-                NavigationStack {
+            Tab("History", systemImage: "gearshape.fill", value: .dashboard) {
+                AppCoordinatorView(path: $router.historyPath) {
+                    HistoryView()
+                }
+            }
+            Tab("Settings", systemImage: "list.clipboard.fill", value: .dashboard) {
+                AppCoordinatorView(path: $router.settingsPath) {
                     SettingsView()
                 }
             }
         }
-        .tint(Color.primaryColor)
+        .tint(.primaryColor)
+        .environment(router)
     }
 }
 
 #Preview {
-    TrainMateTabView()
+    RootTabView()
 }
