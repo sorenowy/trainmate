@@ -1,14 +1,9 @@
-//
-//  TrainMateTabView.swift
-//  TrainMate
-//
-//  Created by Hubert Kuszyński on 22/04/2026.
-//
-
 import SwiftUI
 
 struct RootTabView: View {
     @State private var router = AppRouter()
+    
+    private let dependencyContainer: any DIContainer
     
     var body: some View {
         TabView(selection: $router.selectedTab) {
@@ -17,17 +12,17 @@ struct RootTabView: View {
                     DashboardView()
                 }
             }
-            Tab("Workout", systemImage: "figure.strengthtraining.functional.circle.fill", value: .dashboard) {
+            Tab("Workout", systemImage: "figure.strengthtraining.functional.circle.fill", value: .workout) {
                 AppCoordinatorView(path: $router.workoutPath) {
                     WorkoutView()
                 }
             }
-            Tab("History", systemImage: "gearshape.fill", value: .dashboard) {
+            Tab("History", systemImage: "gearshape.fill", value: .history) {
                 AppCoordinatorView(path: $router.historyPath) {
                     HistoryView()
                 }
             }
-            Tab("Settings", systemImage: "list.clipboard.fill", value: .dashboard) {
+            Tab("Settings", systemImage: "list.clipboard.fill", value: .settings) {
                 AppCoordinatorView(path: $router.settingsPath) {
                     SettingsView()
                 }
@@ -36,8 +31,12 @@ struct RootTabView: View {
         .tint(.primaryColor)
         .environment(router)
     }
+    
+    init(dependencyContainer: any DIContainer) {
+        self.dependencyContainer = dependencyContainer
+    }
 }
 
 #Preview {
-    RootTabView()
+    RootTabView(dependencyContainer: AppDIContainer())
 }

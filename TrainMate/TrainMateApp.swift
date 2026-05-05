@@ -1,36 +1,14 @@
-//
-//  TrainMateApp.swift
-//  TrainMate
-//
-//  Created by Hubert Kuszyński on 22/04/2026.
-//
-
 import SwiftData
 import SwiftUI
 
 @main
 struct TrainMateApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Workout.self, Athlete.self
-        ])
-        let modelConfiguration = ModelConfiguration(
-            schema: schema,
-            isStoredInMemoryOnly: false,
-            cloudKitDatabase: .automatic
-        )
-
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
-
+    
+    @MainActor let dependencyContainer: any DIContainer = AppDIContainer()
+    
     var body: some Scene {
         WindowGroup {
-            MainView()
+            MainView(dependencyContainer: dependencyContainer)
         }
-        .modelContainer(sharedModelContainer)
     }
 }

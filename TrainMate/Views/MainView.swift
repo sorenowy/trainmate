@@ -1,31 +1,38 @@
-//
-//  MainView.swift
-//  TrainMate
-//
-//  Created by Hubert Kuszyński on 23/04/2026.
-//
-
 import SwiftData
 import SwiftUI
 
 struct MainView: View {
-    @Query private var athletes: [Athlete]
+    private let dependencyContainer: any DIContainer
+    
+    private let sessionManager: SessionManager
 
-    private var athlete: Athlete? {
-        athletes.first
-    }
-
+    @State private var hasAthlete: Bool?
+    
     var body: some View {
-        if athlete != nil {
-            // TODO: If going with iPadOS/macOS, there we shift towards other UI
-            RootTabView()
-                .tint(Color.primaryColor)
-        } else {
-            OnboardingView()
+        Group {
+            switch sessionManager.state {
+            case .initializing:
+                ProgressView("Loading...")
+            case .active:
+                RootTabView(dependencyContainer: dependencyContainer)
+                    .tint(.primaryColor)
+                
+            case .noAthlete:
+                OnboardingView()
+            }
         }
+        .onAppear {
+            sessionManager.verifySession()
+        }
+        // TODO: If going with iPadOS/macOS, there we shift towards other UI
+    }
+    
+    init(dependencyContainer: any DIContainer) {
+        self.dependencyContainer = dependencyContainer
+        self.sessionManager = dependencyContainer.sessionManager
     }
 }
 
 #Preview {
-    MainView()
+    MainView(dependencyContainer: AppDIContainer())
 }
