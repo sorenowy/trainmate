@@ -1,10 +1,3 @@
-//
-//  OnboardingProfileSheet.swift
-//  TrainMate
-//
-//  Created by Hubert Kuszyński on 03/05/2026.
-//
-
 import SwiftUI
 
 struct OnboardingProfileSheet: View {
@@ -12,7 +5,7 @@ struct OnboardingProfileSheet: View {
 
     var body: some View {
         VStack(spacing: .tmSpacing.small) {
-            Text("Hello, I'm Profile sheet!")
+            Text(verbatim: "Hello, I'm Profile sheet!")
                 .font(.tmTitle1)
                 .foregroundStyle(.primaryText)
                 .padding(.top, .tmSpacing.xlarge)

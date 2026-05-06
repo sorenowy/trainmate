@@ -1,10 +1,3 @@
-//
-//  DIContainer.swift
-//  TrainMate
-//
-//  Created by Hubert Kuszyński on 05/05/2026.
-//
-
 import Foundation
 import SwiftData
 import os
@@ -15,16 +8,21 @@ protocol DIContainer {
 }
 
 final class AppDIContainer: DIContainer, Logging {
+    private let inMemory: Bool
+    
+    init(inMemory: Bool = false) {
+        self.inMemory = inMemory
+    }
     // DB ENGINE:
-    private let modelContainer: ModelContainer = {
+    lazy var modelContainer: ModelContainer = {
         do {
             let schema = Schema([
                 Workout.self, Athlete.self
             ])
             let modelConfiguration = ModelConfiguration(
                 schema: schema,
-                isStoredInMemoryOnly: false,
-                cloudKitDatabase: .automatic
+                isStoredInMemoryOnly: inMemory,
+                cloudKitDatabase: inMemory ? .none : .automatic
             )
             
             return try ModelContainer(for: schema, configurations: modelConfiguration)
@@ -40,7 +38,30 @@ final class AppDIContainer: DIContainer, Logging {
     }()
     
     @MainActor
+    lazy var backgroundDatabaseClient: any BackgroundDatabaseClientProtocol = {
+        BackgroundDatabaseClient(modelContainer: modelContainer)
+    }()
+    
+    @MainActor
     lazy var sessionManager: SessionManager = {
         SessionManager(databaseClient: databaseClient)
     }()
+}
+
+extension AppDIContainer {
+    static var previewWithAthlete: AppDIContainer {
+        let container = AppDIContainer(inMemory: true)
+        let athlete = Athlete(name: "Hubert Test")
+        
+        try? container.databaseClient.insert(athlete)
+        try? container.databaseClient.save()
+        
+        return container
+    }
+    
+    static var previewEmpty: AppDIContainer {
+        let container = AppDIContainer(inMemory: true)
+
+        return container
+    }
 }

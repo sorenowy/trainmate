@@ -17,8 +17,8 @@ struct SettingsView: View, Logging {
         NavigationView {
             List {
                 Text(workout.name)
-                Text("Item")
-                Text("Item")
+                Text(verbatim: "Item")
+                Text(verbatim: "Item")
             }
             .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.large)

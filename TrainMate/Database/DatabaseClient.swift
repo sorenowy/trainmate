@@ -1,10 +1,3 @@
-//
-//  DatabaseClient.swift
-//  TrainMate
-//
-//  Created by Hubert Kuszyński on 05/05/2026.
-//
-
 import Foundation
 import SwiftData
 
@@ -23,7 +16,7 @@ final class DatabaseClient: DatabaseClientProtocol {
     }
     
     @MainActor
-    func fetch<T: PersistentModel>(_ descriptor: FetchDescriptor<T>) throws -> [T] where T : PersistentModel {
+    func fetch<T: PersistentModel>(_ descriptor: FetchDescriptor<T>) throws -> [T] {
         return try context.fetch(descriptor)
     }
     

@@ -11,10 +11,10 @@ struct OnboardingReadyView: View {
 
             VStack(spacing: .tmSpacing.small) {
                 Spacer()
-                Text("Are you ready?")
+                Text(verbatim: "Are you ready?")
                     .font(.tmDisplay)
 
-                Text("Create your profile and start training!")
+                Text(verbatim: "Create your profile and start training!")
                     .font(.tmBody)
                     .multilineTextAlignment(.center)
 

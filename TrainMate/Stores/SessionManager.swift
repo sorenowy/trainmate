@@ -15,7 +15,6 @@ enum SessionState {
     case noAthlete
 }
 
-
 @Observable
 final class SessionManager: Logging {
     private let databaseClient: any DatabaseClientProtocol
@@ -34,7 +33,7 @@ final class SessionManager: Logging {
             
             let athletes: [Athlete] = try databaseClient.fetch(descriptor)
             
-            self.state = athletes.isEmpty ? .noAthlete : .active
+            self.state = athletes.isEmpty ? .active : .active
         } catch {
             Logger.database.error("[\(self.typeName)] Failed to fetch athletes: \(error.localizedDescription)")
             self.state = .noAthlete

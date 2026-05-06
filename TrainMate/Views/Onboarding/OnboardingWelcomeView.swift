@@ -10,12 +10,12 @@ import SwiftUI
 struct OnboardingWelcomeView: View {
     var body: some View {
         VStack(spacing: .tmSpacing.small) {
-            Text("HELLO!")
+            Text(verbatim: "HELLO!")
                 .font(.tmTitle1)
                 .foregroundStyle(.primaryText)
                 .padding(Spacing.medium)
 
-            Text("This is onboarding welcome screen.")
+            Text(verbatim: "This is onboarding welcome screen.")
                 .font(.tmBody)
                 .foregroundStyle(.primaryText)
                 .padding(Spacing.medium)

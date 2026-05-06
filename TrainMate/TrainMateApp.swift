@@ -4,7 +4,7 @@ import SwiftUI
 @main
 struct TrainMateApp: App {
     
-    @MainActor let dependencyContainer: any DIContainer = AppDIContainer()
+    let dependencyContainer: any DIContainer = AppDIContainer()
     
     var body: some Scene {
         WindowGroup {

@@ -18,38 +18,38 @@ struct DashboardView: View {
 
             VStack(spacing: .tmSpacing.small) {
                 headerView
-                Text("Dashboard View!")
+                Text(verbatim: "Dashboard View!")
                     .font(.tmTitle2)
                     .foregroundStyle(.primaryText)
-                Text("Another line of title data")
+                Text(verbatim: "Another line of title data")
                     .font(.tmTitle3)
                     .padding(.vertical, .tmSpacing.xlarge)
-                Text("Some headline")
+                Text(verbatim: "Some headline")
                     .font(.tmHeadline)
-                Text("Some body text")
+                Text(verbatim: "Some body text")
                     .font(.tmBody)
-                Text("Some smaller text")
+                Text(verbatim: "Some smaller text")
                     .font(.tmCallout)
-                Text("Some ideal smaller even")
+                Text(verbatim: "Some ideal smaller even")
                     .font(.tmCaption)
-                Text("Some ideal xtra smaller even")
+                Text(verbatim: "Some ideal xtra smaller even")
                     .font(.tmCaptionSmall)
 
-                Text("9876542")
+                Text(verbatim: "9876542")
                     .font(.tmMetric)
-                Text("1235")
+                Text(verbatim: "1235")
                     .font(.tmMetricSmall)
 
                 Button("Navigate to some view"){
                     router.navigate(to: .athleteProfile)
                 }
             }
-            .navigationTitle("Hello, \(userName)!")
+            .navigationTitle(L10n.Dashboard.greeting(name: userName))
         }
     }
 
     var headerView: some View {
-        Text("HRV")
+        Text(verbatim: "HRV")
             .font(.tmTitle1)
     }
 }

@@ -33,6 +33,10 @@ struct MainView: View {
     }
 }
 
-#Preview {
-    MainView(dependencyContainer: AppDIContainer())
+#Preview("Preview with athlete") {
+    MainView(dependencyContainer: AppDIContainer.previewWithAthlete)
+}
+
+#Preview("Preview no athlete in system") {
+    MainView(dependencyContainer: AppDIContainer.previewEmpty)
 }
