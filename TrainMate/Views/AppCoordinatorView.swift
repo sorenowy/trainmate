@@ -10,7 +10,7 @@ import SwiftUI
 struct AppCoordinatorView<Content: View>: View {
     @Binding var path: NavigationPath
     @ViewBuilder let content: () -> Content
-    
+
     var body: some View {
         NavigationStack(path: $path) {
             content()
@@ -22,7 +22,7 @@ struct AppCoordinatorView<Content: View>: View {
                         EmptyView()
                     case .notificationSettings:
                         EmptyView()
-                    case .workoutDetails(let _):
+                    case .workoutDetails:
                         EmptyView() // TODO: Create views
                     }
                 }
@@ -32,7 +32,7 @@ struct AppCoordinatorView<Content: View>: View {
 
 #Preview("Dashboard - Start") {
     @Previewable @State var path = NavigationPath()
-    
+
     AppCoordinatorView(path: $path) {
         DashboardView()
     }
@@ -41,7 +41,7 @@ struct AppCoordinatorView<Content: View>: View {
 
 #Preview("Workout - Start") {
     @Previewable @State var path = NavigationPath()
-    
+
     AppCoordinatorView(path: $path) {
         WorkoutView()
     }
@@ -50,7 +50,7 @@ struct AppCoordinatorView<Content: View>: View {
 
 #Preview("History - Start") {
     @Previewable @State var path = NavigationPath()
-    
+
     AppCoordinatorView(path: $path) {
         HistoryView()
     }
@@ -59,7 +59,7 @@ struct AppCoordinatorView<Content: View>: View {
 
 #Preview("Settings - Start") {
     @Previewable @State var path = NavigationPath()
-    
+
     AppCoordinatorView(path: $path) {
         SettingsView()
     }

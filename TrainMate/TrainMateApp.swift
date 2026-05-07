@@ -3,12 +3,12 @@ import SwiftUI
 
 @main
 struct TrainMateApp: App {
-    
-    let dependencyContainer: any DIContainer = AppDIContainer()
-    
+    private let dependencyContainer: any DIContainer = AppDIContainer()
+
     var body: some Scene {
         WindowGroup {
-            MainView(dependencyContainer: dependencyContainer)
+            MainView()
+                .environment(\.diContainer, dependencyContainer)
         }
     }
 }

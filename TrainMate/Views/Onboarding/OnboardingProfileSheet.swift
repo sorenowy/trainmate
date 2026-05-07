@@ -9,7 +9,7 @@ struct OnboardingProfileSheet: View {
                 .font(.tmTitle1)
                 .foregroundStyle(.primaryText)
                 .padding(.top, .tmSpacing.xlarge)
-            
+
             Form {
                 TextField("Name", text: $store.name)
                 TextField("Weight", value: $store.weight, format: .number)

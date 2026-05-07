@@ -5,8 +5,8 @@
 //  Created by Hubert Kuszyński on 04/05/2026.
 //
 
-import SwiftUI
 import os
+import SwiftUI
 
 enum AppTab: Hashable {
     case settings
@@ -25,14 +25,16 @@ enum AppRoute: Hashable {
 @Observable
 final class AppRouter: Logging {
     // MARK: - Properties
+
     var selectedTab: AppTab = .dashboard
-    
+
     var dashboardPath = NavigationPath()
     var workoutPath = NavigationPath()
     var settingsPath = NavigationPath()
     var historyPath = NavigationPath()
-    
+
     // MARK: - Router API
+
     func navigate(to route: AppRoute) {
         switch selectedTab {
         case .settings:
@@ -45,7 +47,7 @@ final class AppRouter: Logging {
             historyPath.append(route)
         }
     }
-    
+
     func returnToPrevious() {
         switch selectedTab {
         case .settings:
@@ -74,13 +76,13 @@ final class AppRouter: Logging {
             historyPath.removeLast()
         }
     }
-    
+
     func returnToRoot(to tab: AppTab?) {
         settingsPath.removeLast(settingsPath.count)
         dashboardPath.removeLast(dashboardPath.count)
         workoutPath.removeLast(workoutPath.count)
         historyPath.removeLast(historyPath.count)
-        
+
         guard let tab else {
             Logger.app.warning("[\(self.typeName)] No tab to return to. Returning to current one.")
             return

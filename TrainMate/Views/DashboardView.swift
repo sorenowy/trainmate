@@ -6,11 +6,21 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct DashboardView: View {
     @Environment(AppRouter.self) private var router
+    @Environment(\.diContainer) private var dependencyContainer: any DIContainer
     
-    private let userName: String = "Hubert"
+    private var userName: String {
+        let value: String
+        do {
+            value = try dependencyContainer.databaseClient.fetch(FetchDescriptor<Athlete>()).first?.name ?? "Anonymous"
+        } catch {
+            return "Error"
+        }
+        return value // TODO: REMOVE
+    }
 
     var body: some View {
         ZStack {
@@ -40,7 +50,7 @@ struct DashboardView: View {
                 Text(verbatim: "1235")
                     .font(.tmMetricSmall)
 
-                Button("Navigate to some view"){
+                Button("Navigate to some view") {
                     router.navigate(to: .athleteProfile)
                 }
             }

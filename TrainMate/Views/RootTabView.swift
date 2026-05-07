@@ -2,9 +2,9 @@ import SwiftUI
 
 struct RootTabView: View {
     @State private var router = AppRouter()
-    
-    private let dependencyContainer: any DIContainer
-    
+
+    @Environment(\.diContainer) private var dependencyContainer: any DIContainer
+
     var body: some View {
         TabView(selection: $router.selectedTab) {
             Tab("Home", systemImage: "house.fill", value: .dashboard) {
@@ -31,12 +31,8 @@ struct RootTabView: View {
         .tint(.primaryColor)
         .environment(router)
     }
-    
-    init(dependencyContainer: any DIContainer) {
-        self.dependencyContainer = dependencyContainer
-    }
 }
 
 #Preview {
-    RootTabView(dependencyContainer: AppDIContainer())
+    RootTabView()
 }

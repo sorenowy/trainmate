@@ -14,9 +14,10 @@ enum L10n {
             return String(format: formatString, name)
         }
     }
-    enum Workout { }
-    enum History { }
-    enum Settings { }
-    
+
+    enum Workout {}
+    enum History {}
+    enum Settings {}
+
     static let appTitle = LocalizedStringResource("app.title")
 }
