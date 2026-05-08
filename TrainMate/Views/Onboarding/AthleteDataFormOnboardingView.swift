@@ -11,27 +11,32 @@ struct AthleteDataFormOnboardingView: View {
     @State private var viewModel: AthleteDataFormOnboardingViewModel
     var body: some View {
         ScrollView {
-            VStack(spacing: .tmSpacing.large) {
+            VStack(spacing: .tmSpacing.xlarge) {
+                Text(verbatim:"some title")
+                    .font(.tmTitle2)
+                    .foregroundStyle(Color.secondaryTextColor)
+                    .padding(.horizontal, .tmSpacing.small)
+                
                 VStack(alignment: .leading, spacing: .tmSpacing.medium) {
                     Text(verbatim: "personal info section")
-                        .font(.tmTitle2)
+                        .font(.tmTitle3)
                         .foregroundStyle(Color.secondaryTextColor)
                         .padding(.horizontal, .tmSpacing.small)
+                    
+                    VStack {
+                        TextField("placeholder_1", text: $viewModel.athlete.name)
+                            .padding()
+                            .foregroundStyle(Color.primaryTextColor)
+                        
+                        Divider().background(Color.dividerColor)
+                        
+                        DatePicker("birth_date_picker", selection: $viewModel.athlete.birthDate, displayedComponents: .date)
+                            .padding()
+                            .foregroundStyle(Color.primaryTextColor)
+                    }
+                    .background(Color.surfaceColor)
+                    .cornerRadius(.tmSpacing.medium)
                 }
-
-                VStack {
-                    TextField("placeholder_1", text: $viewModel.athlete.name)
-                        .padding()
-                        .foregroundStyle(Color.primaryTextColor)
-
-                    Divider().background(Color.dividerColor)
-
-                    DatePicker("birth_date_picker", selection: $viewModel.athlete.birthDate, displayedComponents: .date)
-                        .padding()
-                        .foregroundStyle(Color.primaryTextColor)
-                }
-                .background(Color.surfaceColor)
-                .cornerRadius(.tmSpacing.medium)
 
                 VStack(alignment: .leading, spacing: .tmSpacing.medium) {
                     Text(verbatim: "metrics_section")
@@ -40,7 +45,7 @@ struct AthleteDataFormOnboardingView: View {
                         .padding(.horizontal, .tmSpacing.small)
 
                     VStack {
-                        Button(action: {}) {
+                        Button(action: {}, label: {
                             HStack {
                                 Image(systemName: "heart.text.square.fill")
                                 Text(verbatim: "sync_with_hk")
@@ -50,9 +55,9 @@ struct AthleteDataFormOnboardingView: View {
                                     .font(.tmBody.bold())
                             }
                             .foregroundStyle(Color.backgroundColor)
-                            .padding()
+                            .padding(.tmSpacing.medium)
                             .background(Color.primaryColor)
-                        }
+                        })
 
                         Divider().background(Color.dividerColor)
 
@@ -67,6 +72,21 @@ struct AthleteDataFormOnboardingView: View {
                                 .frame(width: 80)
 
                             Text("kg")
+                                .foregroundStyle(Color.secondaryTextColor)
+                        }
+                        .padding()
+                        
+                        HStack {
+                            Text(verbatim: "height_label")
+                                .foregroundStyle(Color.primaryTextColor)
+                            Spacer()
+                            TextField("0", value: $viewModel.athlete.weight, format: .number)
+                                .keyboardType(.decimalPad)
+                                .multilineTextAlignment(.trailing)
+                                .foregroundStyle(Color.primaryTextColor)
+                                .frame(width: 80)
+
+                            Text("cm")
                                 .foregroundStyle(Color.secondaryTextColor)
                         }
                         .padding()
@@ -88,7 +108,7 @@ struct AthleteDataFormOnboardingView: View {
                         .frame(maxWidth: .infinity)
                         .padding()
                         .background(Color.primaryColor)
-                        .foregroundStyle(Color.primaryTextColor)
+                        .foregroundStyle(Color.backgroundColor)
                         .cornerRadius(.tmSpacing.medium)
                 }
                 .disabled(false)
