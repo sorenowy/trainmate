@@ -18,6 +18,15 @@ enum L10n {
     enum Workout {}
     enum History {}
     enum Settings {}
+    enum Onboarding {
+        static let onboardingPageOneTitle = LocalizedStringResource("app.onboarding.title.one")
+        static let onboardingPageTwoTitle = LocalizedStringResource("app.onboarding.title.two")
+        static let onboardingPageThreeTitle = LocalizedStringResource("app.onboarding.title.three")
+
+        static let onboardingPageOneDescription = LocalizedStringResource("app.onboarding.description.one")
+        static let onboardingPageTwoDescription = LocalizedStringResource("app.onboarding.description.two")
+        static let onboardingPageThreeDescription = LocalizedStringResource("app.onboarding.description.three")
+    }
 
     static let appTitle = LocalizedStringResource("app.title")
 }

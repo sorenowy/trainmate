@@ -7,7 +7,7 @@ struct MainView: View {
     private var sessionManager: SessionManager {
         dependencyContainer.sessionManager
     }
-    
+
     var body: some View {
         Group {
             switch sessionManager.state {

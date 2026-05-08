@@ -1,10 +1,3 @@
-//
-//  SessionManager.swift
-//  TrainMate
-//
-//  Created by Hubert Kuszyński on 05/05/2026.
-//
-
 import Foundation
 import os
 import SwiftData

@@ -5,13 +5,13 @@
 //  Created by Hubert Kuszyński on 23/04/2026.
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct DashboardView: View {
     @Environment(AppRouter.self) private var router
     @Environment(\.diContainer) private var dependencyContainer: any DIContainer
-    
+
     private var userName: String {
         let value: String
         do {

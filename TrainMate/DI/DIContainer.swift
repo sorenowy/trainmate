@@ -9,6 +9,7 @@ protocol DIContainer {
 }
 
 // MARK: - App Container
+
 final class AppDIContainer: DIContainer, Logging {
     /// DB ENGINE:
     private let modelContainer: ModelContainer = {
@@ -41,8 +42,8 @@ final class AppDIContainer: DIContainer, Logging {
 }
 
 // MARK: - Mock Container
+
 final class MockDIContainer: DIContainer {
-    
     init(hasAthlete: Bool = false) {
         if hasAthlete {
             let fakeAthlete = Athlete(name: "John", hrMax: 130)
@@ -50,6 +51,7 @@ final class MockDIContainer: DIContainer {
             try? self.databaseClient.save()
         }
     }
+
     private let modelContainer: ModelContainer = {
         do {
             let schema = Schema([
@@ -62,18 +64,16 @@ final class MockDIContainer: DIContainer {
 
             return try ModelContainer(for: schema, configurations: modelConfiguration)
         } catch {
-            Logger.database.error("[ModelContainer] Error while creating Mock ModelContainer: \(error.localizedDescription)")
+            Logger.database
+                .error("[ModelContainer] Error while creating Mock ModelContainer: \(error.localizedDescription)")
             fatalError(error.localizedDescription)
         }
     }()
-    
-    @MainActor lazy var databaseClient: any DatabaseClientProtocol = {
-        DatabaseClient(context: modelContainer.mainContext)
-    }()
-    
-    lazy var backgroundDatabaseClient: any BackgroundDatabaseClientProtocol = {
-       BackgroundDatabaseClient(modelContainer: modelContainer)
-    }()
-    
+
+    @MainActor lazy var databaseClient: any DatabaseClientProtocol = DatabaseClient(context: modelContainer.mainContext)
+
+    lazy var backgroundDatabaseClient: any BackgroundDatabaseClientProtocol =
+        BackgroundDatabaseClient(modelContainer: modelContainer)
+
     @MainActor lazy var sessionManager: SessionManager = .init(databaseClient: databaseClient)
 }

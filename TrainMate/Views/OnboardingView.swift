@@ -3,25 +3,41 @@ import SwiftData
 import SwiftUI
 
 struct OnboardingView: View {
-    @Environment(\.modelContext) private var context
-    @State private var store = OnboardingStore()
+    @Environment(\.diContainer) private var diContainer: DIContainer
+    @State private var currentPage = 0
 
     var body: some View {
-        TabView(selection: $store.currentPage) {
-            OnboardingWelcomeView()
-                .tag(0)
-            OnboardingFeatureView()
-                .tag(1)
-            OnboardingReadyView(store: store)
-                .tag(2)
+        TabView(selection: $currentPage) {
+            OnboardingStepView(
+                title: L10n.Onboarding.onboardingPageOneTitle,
+                description: L10n.Onboarding.onboardingPageOneDescription,
+                imageName: "figure.run.circle.fill"
+            )
+            .tag(0)
+            OnboardingStepView(
+                title: L10n.Onboarding.onboardingPageTwoTitle,
+                description: L10n.Onboarding.onboardingPageTwoDescription,
+                imageName: "square.stack.3d.up.fill"
+            )
+            .tag(1)
+            OnboardingStepView(
+                title: L10n.Onboarding.onboardingPageThreeTitle,
+                description: L10n.Onboarding.onboardingPageThreeDescription,
+                imageName: "applewatch.radiowaves.left.and.right"
+            )
+            .tag(2)
+
+            AthleteDataFormOnboardingView(viewModel: AthleteDataFormOnboardingViewModel(
+                readDatabaseClient: diContainer.databaseClient,
+                writeDatabaseClient: diContainer.backgroundDatabaseClient
+            ))
+            .tag(3)
         }
         .tabViewStyle(.page(indexDisplayMode: .always))
         .indexViewStyle(.page(backgroundDisplayMode: .always))
-        .animation(.easeInOut, value: store.currentPage)
+        .animation(.easeInOut, value: currentPage)
         .background(Color.backgroundColor)
-        .task {
-            store.loadContext(modelContext: context)
-        }
+        .tint(.primaryColor)
     }
 }
 
