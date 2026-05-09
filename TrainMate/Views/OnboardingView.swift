@@ -29,7 +29,8 @@ struct OnboardingView: View {
 
             AthleteDataFormOnboardingView(viewModel: AthleteDataFormOnboardingViewModel(
                 readDatabaseClient: diContainer.databaseClient,
-                writeDatabaseClient: diContainer.backgroundDatabaseClient
+                writeDatabaseClient: diContainer.backgroundDatabaseClient,
+                healthKitClient: diContainer.healthKitClient
             ))
             .tag(3)
         }

@@ -9,30 +9,35 @@ import SwiftUI
 
 struct AthleteDataFormOnboardingView: View {
     @State private var viewModel: AthleteDataFormOnboardingViewModel
+
     var body: some View {
         ScrollView {
             VStack(spacing: .tmSpacing.xlarge) {
-                Text(verbatim:"some title")
+                Text(verbatim: "some title")
                     .font(.tmTitle2)
                     .foregroundStyle(Color.secondaryTextColor)
                     .padding(.horizontal, .tmSpacing.small)
-                
+
                 VStack(alignment: .leading, spacing: .tmSpacing.medium) {
                     Text(verbatim: "personal info section")
                         .font(.tmTitle3)
                         .foregroundStyle(Color.secondaryTextColor)
                         .padding(.horizontal, .tmSpacing.small)
-                    
+
                     VStack {
                         TextField("placeholder_1", text: $viewModel.athlete.name)
                             .padding()
                             .foregroundStyle(Color.primaryTextColor)
-                        
+
                         Divider().background(Color.dividerColor)
-                        
-                        DatePicker("birth_date_picker", selection: $viewModel.athlete.birthDate, displayedComponents: .date)
-                            .padding()
-                            .foregroundStyle(Color.primaryTextColor)
+
+                        DatePicker(
+                            "birth_date_picker",
+                            selection: $viewModel.athlete.birthDate,
+                            displayedComponents: .date
+                        )
+                        .padding()
+                        .foregroundStyle(Color.primaryTextColor)
                     }
                     .background(Color.surfaceColor)
                     .cornerRadius(.tmSpacing.medium)
@@ -45,9 +50,15 @@ struct AthleteDataFormOnboardingView: View {
                         .padding(.horizontal, .tmSpacing.small)
 
                     VStack {
-                        Button(action: {}, label: {
+                        Button(action: { Task { try await viewModel.syncWithHealthKit() } }, label: {
                             HStack {
-                                Image(systemName: "heart.text.square.fill")
+                                if viewModel.isLoading {
+                                    ProgressView()
+                                        .tint(Color.backgroundColor)
+                                        .padding(.trailing, .tmSpacing.small)
+                                } else {
+                                    Image(systemName: "heart.text.square.fill")
+                                }
                                 Text(verbatim: "sync_with_hk")
                                     .font(.tmHeadline)
                                 Spacer()
@@ -57,7 +68,9 @@ struct AthleteDataFormOnboardingView: View {
                             .foregroundStyle(Color.backgroundColor)
                             .padding(.tmSpacing.medium)
                             .background(Color.primaryColor)
+                            .cornerRadius(.tmSpacing.medium)
                         })
+                        .disabled(viewModel.isLoading)
 
                         Divider().background(Color.dividerColor)
 
@@ -75,7 +88,7 @@ struct AthleteDataFormOnboardingView: View {
                                 .foregroundStyle(Color.secondaryTextColor)
                         }
                         .padding()
-                        
+
                         HStack {
                             Text(verbatim: "height_label")
                                 .foregroundStyle(Color.primaryTextColor)
@@ -102,7 +115,7 @@ struct AthleteDataFormOnboardingView: View {
 
                 Spacer(minLength: 20)
 
-                Button(action: {}) {
+                Button(action: {}, label: {
                     Text(verbatim: "finish_onboarding_btn")
                         .font(.tmHeadline)
                         .frame(maxWidth: .infinity)
@@ -110,14 +123,20 @@ struct AthleteDataFormOnboardingView: View {
                         .background(Color.primaryColor)
                         .foregroundStyle(Color.backgroundColor)
                         .cornerRadius(.tmSpacing.medium)
-                }
-                .disabled(false)
+                })
+                .disabled(!viewModel.isReady)
                 .padding(.bottom, .tmSpacing.xlarge)
             }
             .padding([.horizontal, .top], .tmSpacing.large)
         }
         .background(Color.backgroundColor.ignoresSafeArea())
         .scrollDismissesKeyboard(.interactively)
+        .alert("Sync Error", isPresented: $viewModel.isError, presenting: viewModel.error) {
+            _ in
+            Button("Acknowledged", role: .cancel) {}
+        } message: { error in
+            Text(error.localizedDescription)
+        }
     }
 
     init(viewModel: AthleteDataFormOnboardingViewModel) {
@@ -129,6 +148,7 @@ struct AthleteDataFormOnboardingView: View {
     let container = MockDIContainer()
     AthleteDataFormOnboardingView(viewModel: AthleteDataFormOnboardingViewModel(
         readDatabaseClient: container.databaseClient,
-        writeDatabaseClient: container.backgroundDatabaseClient
+        writeDatabaseClient: container.backgroundDatabaseClient,
+        healthKitClient: container.healthKitClient
     ))
 }

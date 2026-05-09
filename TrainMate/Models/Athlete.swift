@@ -1,9 +1,11 @@
 import Foundation
+import HealthKit
 import SwiftData
 
 @Model
 class Athlete {
     var name: String = ""
+    var biologicalSex: UserSex = UserSex.female
     var hrMax: Int = 220
     var hrResting: Int = 70
     var ftp: Int = 0 // Functional Threshold Power (cycling)

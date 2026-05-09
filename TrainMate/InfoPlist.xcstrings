@@ -1,0 +1,90 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "CFBundleName" : {
+      "comment" : "Bundle name",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TrainMate"
+          }
+        }
+      }
+    },
+    "NSHealthClinicalHealthRecordsShareUsageDescription" : {
+      "comment" : "Privacy - Health Records Usage Description",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default"
+          }
+        }
+      }
+    },
+    "NSHealthShareUsageDescription" : {
+      "comment" : "Privacy - Health Share Usage Description",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "TrainMate benötigt Zugriff auf dein Gewicht, deine Größe und dein Alter, um deine Herzfrequenzzonen und den Kalorienverbrauch genau zu berechnen."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TrainMate needs access to your weight, height, and age to accurately calculate your heart rate zones and calorie burn."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "TrainMate a besoin d'accéder à votre poids, votre taille et votre âge pour calculer avec précision vos zones de fréquence cardiaque et les calories brûlées."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "TrainMate potrzebuje dostępu do Twojej wagi, wzrostu i wieku, aby precyzyjnie wyliczyć strefy tętna oraz spalone kalorie."
+          }
+        }
+      }
+    },
+    "NSHealthUpdateUsageDescription" : {
+      "comment" : "Privacy - Health Update Usage Description",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "TrainMate speichert deine absolvierten Workouts und deinen aktiven Kalorienverbrauch in Apple Health."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TrainMate will save your completed workouts and active energy burned to Apple Health."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "TrainMate enregistrera vos entraînements terminés et les calories brûlées dans Apple Santé."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "TrainMate będzie zapisywać Twoje ukończone treningi oraz spalone kalorie w aplikacji Zdrowie."
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.2"
+}

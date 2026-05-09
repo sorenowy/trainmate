@@ -6,6 +6,7 @@ protocol DIContainer {
     @MainActor var databaseClient: any DatabaseClientProtocol { get }
     @MainActor var sessionManager: SessionManager { get }
     var backgroundDatabaseClient: any BackgroundDatabaseClientProtocol { get }
+    var healthKitClient: any HealthKitClientProtocol { get }
 }
 
 // MARK: - App Container
@@ -32,13 +33,12 @@ final class AppDIContainer: DIContainer, Logging {
 
     @MainActor
     lazy var databaseClient: any DatabaseClientProtocol = DatabaseClient(context: modelContainer.mainContext)
-
-    @MainActor
-    lazy var backgroundDatabaseClient: any BackgroundDatabaseClientProtocol =
-        BackgroundDatabaseClient(modelContainer: modelContainer)
-
     @MainActor
     lazy var sessionManager: SessionManager = .init(databaseClient: databaseClient)
+
+    lazy var healthKitClient: any HealthKitClientProtocol = HealthKitClient()
+    lazy var backgroundDatabaseClient: any BackgroundDatabaseClientProtocol =
+        BackgroundDatabaseClient(modelContainer: modelContainer)
 }
 
 // MARK: - Mock Container
@@ -71,9 +71,8 @@ final class MockDIContainer: DIContainer {
     }()
 
     @MainActor lazy var databaseClient: any DatabaseClientProtocol = DatabaseClient(context: modelContainer.mainContext)
-
+    @MainActor lazy var sessionManager: SessionManager = .init(databaseClient: databaseClient)
     lazy var backgroundDatabaseClient: any BackgroundDatabaseClientProtocol =
         BackgroundDatabaseClient(modelContainer: modelContainer)
-
-    @MainActor lazy var sessionManager: SessionManager = .init(databaseClient: databaseClient)
+    lazy var healthKitClient: any HealthKitClientProtocol = HealthKitClient()
 }
