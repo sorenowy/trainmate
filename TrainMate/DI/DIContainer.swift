@@ -7,6 +7,7 @@ protocol DIContainer {
     @MainActor var sessionManager: SessionManager { get }
     var backgroundDatabaseClient: any BackgroundDatabaseClientProtocol { get }
     var healthKitClient: any HealthKitClientProtocol { get }
+    var userSettings: any UserSettingsProtocol { get }
 }
 
 // MARK: - App Container
@@ -39,6 +40,7 @@ final class AppDIContainer: DIContainer, Logging {
     lazy var healthKitClient: any HealthKitClientProtocol = HealthKitClient()
     lazy var backgroundDatabaseClient: any BackgroundDatabaseClientProtocol =
         BackgroundDatabaseClient(modelContainer: modelContainer)
+    lazy var userSettings: any UserSettingsProtocol = UserSettings()
 }
 
 // MARK: - Mock Container
@@ -75,4 +77,5 @@ final class MockDIContainer: DIContainer {
     lazy var backgroundDatabaseClient: any BackgroundDatabaseClientProtocol =
         BackgroundDatabaseClient(modelContainer: modelContainer)
     lazy var healthKitClient: any HealthKitClientProtocol = HealthKitClient()
+    lazy var userSettings: any UserSettingsProtocol = MockUserSettings()
 }

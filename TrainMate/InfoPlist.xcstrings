@@ -5,22 +5,28 @@
       "comment" : "Bundle name",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "TrainMate"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "TrainMate"
           }
-        }
-      }
-    },
-    "NSHealthClinicalHealthRecordsShareUsageDescription" : {
-      "comment" : "Privacy - Health Records Usage Description",
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "en" : {
+        },
+        "fr" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Default"
+            "state" : "translated",
+            "value" : "TrainMate"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "TrainMate"
           }
         }
       }

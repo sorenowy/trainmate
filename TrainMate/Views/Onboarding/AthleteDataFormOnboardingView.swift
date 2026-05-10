@@ -6,45 +6,67 @@
 //
 
 import SwiftUI
+import os
 
-struct AthleteDataFormOnboardingView: View {
+struct AthleteDataFormOnboardingView: View, Logging {
     @State private var viewModel: AthleteDataFormOnboardingViewModel
 
     var body: some View {
         ScrollView {
             VStack(spacing: .tmSpacing.xlarge) {
-                Text(verbatim: "some title")
+                Text(L10n.Onboarding.onboardingAthletePageTitle)
                     .font(.tmTitle2)
                     .foregroundStyle(Color.secondaryTextColor)
                     .padding(.horizontal, .tmSpacing.small)
 
                 VStack(alignment: .leading, spacing: .tmSpacing.medium) {
-                    Text(verbatim: "personal info section")
+                    Text(L10n.Onboarding.onboardingAthletePagePersonalDataTitle)
                         .font(.tmTitle3)
                         .foregroundStyle(Color.secondaryTextColor)
                         .padding(.horizontal, .tmSpacing.small)
 
                     VStack {
-                        TextField("placeholder_1", text: $viewModel.athlete.name)
+                        TextField(L10n.Onboarding.onboardingAthletePageNameLabel, text: $viewModel.athlete.name)
                             .padding()
                             .foregroundStyle(Color.primaryTextColor)
 
                         Divider().background(Color.dividerColor)
 
                         DatePicker(
-                            "birth_date_picker",
+                            L10n.Onboarding.onboardingAthleteDateLabel,
                             selection: $viewModel.athlete.birthDate,
                             displayedComponents: .date
                         )
-                        .padding()
+                        .padding(.horizontal, .tmSpacing.medium)
+                        .padding(.vertical, .tmSpacing.small)
                         .foregroundStyle(Color.primaryTextColor)
+                        
+                        Divider().background(Color.dividerColor)
+                        
+                        HStack {
+                            Text(L10n.Onboarding.onboardingAthleteSexLabel)
+                                .foregroundStyle(Color.primaryTextColor)
+                            
+                            Spacer()
+                            
+                            Picker("bio_sex_label", selection: $viewModel.athlete.biologicalSex) {
+                                ForEach(UserSex.allCases, id: \.self) { sex in
+                                    Text(String(localized: sex.localizedDescription)).tag(sex)
+                                }
+                            }
+                            .pickerStyle(.menu)
+                            .tint(Color.primaryTextColor)
+                        }
+                        .padding(.horizontal, .tmSpacing.medium)
+                        .padding(.top, .tmSpacing.small)
+                        .padding(.bottom, .tmSpacing.medium)
                     }
                     .background(Color.surfaceColor)
                     .cornerRadius(.tmSpacing.medium)
                 }
 
                 VStack(alignment: .leading, spacing: .tmSpacing.medium) {
-                    Text(verbatim: "metrics_section")
+                    Text(L10n.Onboarding.onboardingAthleteMetricsTitle)
                         .font(.tmTitle3)
                         .foregroundStyle(Color.secondaryTextColor)
                         .padding(.horizontal, .tmSpacing.small)
@@ -59,7 +81,7 @@ struct AthleteDataFormOnboardingView: View {
                                 } else {
                                     Image(systemName: "heart.text.square.fill")
                                 }
-                                Text(verbatim: "sync_with_hk")
+                                Text(L10n.Onboarding.onboardingAthletePageHealthKitButton)
                                     .font(.tmHeadline)
                                 Spacer()
                                 Image(systemName: "chevron.right")
@@ -75,7 +97,7 @@ struct AthleteDataFormOnboardingView: View {
                         Divider().background(Color.dividerColor)
 
                         HStack {
-                            Text(verbatim: "weight_label")
+                            Text(L10n.Onboarding.onboardingAthleteWeightLabel)
                                 .foregroundStyle(Color.primaryTextColor)
                             Spacer()
                             TextField("0", value: $viewModel.athlete.weight, format: .number)
@@ -90,10 +112,10 @@ struct AthleteDataFormOnboardingView: View {
                         .padding()
 
                         HStack {
-                            Text(verbatim: "height_label")
+                            Text(L10n.Onboarding.onboardingAthleteHeightLabel)
                                 .foregroundStyle(Color.primaryTextColor)
                             Spacer()
-                            TextField("0", value: $viewModel.athlete.weight, format: .number)
+                            TextField("0", value: $viewModel.athlete.height, format: .number)
                                 .keyboardType(.decimalPad)
                                 .multilineTextAlignment(.trailing)
                                 .foregroundStyle(Color.primaryTextColor)
@@ -107,7 +129,7 @@ struct AthleteDataFormOnboardingView: View {
                     .background(Color.surfaceColor)
                     .cornerRadius(.tmSpacing.medium)
 
-                    Text(verbatim: "footer_info_hk")
+                    Text(L10n.Onboarding.onboardingAthleteFooter)
                         .font(.tmCaption)
                         .foregroundStyle(Color.secondaryTextColor)
                         .padding(.horizontal, .tmSpacing.small)
@@ -115,31 +137,34 @@ struct AthleteDataFormOnboardingView: View {
 
                 Spacer(minLength: 20)
 
-                Button(action: {}, label: {
-                    Text(verbatim: "finish_onboarding_btn")
+                Button(action: {
+                    Task { await viewModel.finishAthleteSetup() }
+                }, label: {
+                    Text(L10n.Onboarding.onboardingAthleteFinishButton)
                         .font(.tmHeadline)
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color.primaryColor)
-                        .foregroundStyle(Color.backgroundColor)
+                        .background(viewModel.isReady ? Color.primaryColor : Color.secondaryColor)
+                        .foregroundStyle(viewModel.isReady ? Color.backgroundColor : Color.secondaryTextColor)
                         .cornerRadius(.tmSpacing.medium)
                 })
                 .disabled(!viewModel.isReady)
+                .opacity(!viewModel.isReady ? 0.3 : 1.0)
                 .padding(.bottom, .tmSpacing.xlarge)
             }
             .padding([.horizontal, .top], .tmSpacing.large)
         }
         .background(Color.backgroundColor.ignoresSafeArea())
         .scrollDismissesKeyboard(.interactively)
-        .alert("Sync Error", isPresented: $viewModel.isError, presenting: viewModel.error) {
-            _ in
-            Button("Acknowledged", role: .cancel) {}
+        .alert("Sync Error", isPresented: $viewModel.isError, presenting: viewModel.error) { _ in
+            Button(L10n.acknowledgeButtonTitle, role: .cancel) {}
         } message: { error in
             Text(error.localizedDescription)
         }
     }
 
     init(viewModel: AthleteDataFormOnboardingViewModel) {
+        Logger.ui.info("[AthleteDataFormOnboardingView] UI Initialized")
         self.viewModel = viewModel
     }
 }
@@ -149,6 +174,8 @@ struct AthleteDataFormOnboardingView: View {
     AthleteDataFormOnboardingView(viewModel: AthleteDataFormOnboardingViewModel(
         readDatabaseClient: container.databaseClient,
         writeDatabaseClient: container.backgroundDatabaseClient,
-        healthKitClient: container.healthKitClient
+        healthKitClient: container.healthKitClient,
+        userSettings: container.userSettings,
+        sessionManager: container.sessionManager
     ))
 }

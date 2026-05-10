@@ -9,7 +9,9 @@ final class AthleteDataFormOnboardingViewModel: Logging {
     private let readDatabaseClient: any DatabaseClientProtocol
     private let writeDatabaseClient: any BackgroundDatabaseClientProtocol
     private let healthKitClient: any HealthKitClientProtocol
-
+    private let userSettings: any UserSettingsProtocol
+    private let sessionManager: SessionManager
+    
     var athlete: Athlete = .init()
     var isHealthKitSynced: Bool = false
     var isLoading: Bool = false
@@ -23,11 +25,15 @@ final class AthleteDataFormOnboardingViewModel: Logging {
     init(
         readDatabaseClient: any DatabaseClientProtocol,
         writeDatabaseClient: any BackgroundDatabaseClientProtocol,
-        healthKitClient: any HealthKitClientProtocol
+        healthKitClient: any HealthKitClientProtocol,
+        userSettings: any UserSettingsProtocol,
+        sessionManager: SessionManager,
     ) {
         self.readDatabaseClient = readDatabaseClient
         self.writeDatabaseClient = writeDatabaseClient
         self.healthKitClient = healthKitClient
+        self.userSettings = userSettings
+        self.sessionManager = sessionManager
         Logger.app.info("[\(self.typeName)] initialized")
     }
 
@@ -64,10 +70,27 @@ final class AthleteDataFormOnboardingViewModel: Logging {
             Logger.app.error("[\(self.typeName)] failed to fetch biometric data: \(error.localizedDescription)]")
         }
     }
+    
+    func finishAthleteSetup() async {
+        withAnimation { isLoading = true }
+        defer {
+            withAnimation { isLoading = false }
+        }
+        
+        do {
+            try readDatabaseClient.insert(athlete)
+            Logger.database.info("[\(self.typeName)] successfully inserted athlete")
+            userSettings.finishOnboarding()
+            sessionManager.verifySession()
+        } catch {
+            self.error = error
+            self.isError = true
+            Logger.database.error("[\(self.typeName)] failed to insert athlete: \(error.localizedDescription)]")
+        }
+    }
 
     @concurrent private func callHealthKitClient() async throws
-        -> HealthKitData?
-    {
+        -> HealthKitData? {
         let authorized = try await healthKitClient.requestAuthorization()
 
         if authorized {

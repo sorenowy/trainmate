@@ -319,7 +319,6 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TrainMate/Info.plist;
-				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = Default;
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "TrainMate needs access to your weight, height, and age to accurately calculate your heart rate zones and calorie burn.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "TrainMate will save your completed workouts and active energy burned to Apple Health.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -355,7 +354,6 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TrainMate/Info.plist;
-				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = Default;
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "TrainMate needs access to your weight, height, and age to accurately calculate your heart rate zones and calorie burn.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "TrainMate will save your completed workouts and active energy burned to Apple Health.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
