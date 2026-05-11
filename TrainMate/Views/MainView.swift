@@ -2,6 +2,7 @@ import SwiftData
 import SwiftUI
 
 struct MainView: View {
+    @Environment(AppRouter.self) private var router: AppRouter
     @Environment(\.diContainer) private var dependencyContainer: any DIContainer
 
     private var sessionManager: SessionManager {
@@ -10,22 +11,28 @@ struct MainView: View {
 
     var body: some View {
         Group {
-            switch sessionManager.state {
-            case .initializing:
+            switch router.root {
+            case .loading:
                 ProgressView("Loading...")
-
-            case .active:
+                    .onAppear {
+                        verifySessionAndRoute()
+                    }
+            case .onboarding:
+                OnboardingView()
+            case .mainApp:
                 RootTabView()
                     .tint(.primaryColor)
-
-            case .noAthlete:
-                OnboardingView()
             }
         }
-        .onAppear {
-            sessionManager.verifySession()
-        }
         // TODO: If going with iPadOS/macOS, there we shift towards other UI
+    }
+    
+    private func verifySessionAndRoute() {
+        if dependencyContainer.sessionManager.state == .noAthlete {
+            router.switchRoot(to: .onboarding)
+        } else {
+            router.switchRoot(to: .mainApp)
+        }
     }
 }
 

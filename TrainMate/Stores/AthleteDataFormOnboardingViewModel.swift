@@ -6,11 +6,20 @@ import SwiftUI
 @Observable
 @MainActor
 final class AthleteDataFormOnboardingViewModel: Logging {
+    
+    enum State {
+        case idle
+        case loading
+        case completed
+        case error
+    }
+    
     private let readDatabaseClient: any DatabaseClientProtocol
     private let writeDatabaseClient: any BackgroundDatabaseClientProtocol
     private let healthKitClient: any HealthKitClientProtocol
     private let userSettings: any UserSettingsProtocol
     private let sessionManager: SessionManager
+    private(set) var state = State.idle
     
     var athlete: Athlete = .init()
     var isHealthKitSynced: Bool = false
@@ -38,9 +47,9 @@ final class AthleteDataFormOnboardingViewModel: Logging {
     }
 
     func syncWithHealthKit() async throws {
-        isLoading = true
+        state = .loading
         Logger.app.info("[\(self.typeName)] synchronizing with HealthKit")
-        defer { withAnimation { isLoading = false } }
+        defer { withAnimation { state = .idle } }
 
         do {
             let biometrics = try await callHealthKitClient()
@@ -67,24 +76,24 @@ final class AthleteDataFormOnboardingViewModel: Logging {
         } catch {
             self.isError = true
             self.error = error
+            state = .error
             Logger.app.error("[\(self.typeName)] failed to fetch biometric data: \(error.localizedDescription)]")
         }
     }
     
     func finishAthleteSetup() async {
-        withAnimation { isLoading = true }
-        defer {
-            withAnimation { isLoading = false }
-        }
+        withAnimation { state = .loading }
         
         do {
             try readDatabaseClient.insert(athlete)
             Logger.database.info("[\(self.typeName)] successfully inserted athlete")
+            state = .completed
             userSettings.finishOnboarding()
             sessionManager.verifySession()
         } catch {
             self.error = error
             self.isError = true
+            state = .error
             Logger.database.error("[\(self.typeName)] failed to insert athlete: \(error.localizedDescription)]")
         }
     }

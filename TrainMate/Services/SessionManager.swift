@@ -16,6 +16,7 @@ final class SessionManager: Logging {
 
     init(databaseClient: any DatabaseClientProtocol) {
         self.databaseClient = databaseClient
+        verifySession()
     }
 
     @MainActor

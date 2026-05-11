@@ -1,11 +1,11 @@
 import SwiftUI
 
 struct RootTabView: View {
-    @State private var router = AppRouter()
-
+    @Environment(AppRouter.self) private var appRouter: AppRouter
     @Environment(\.diContainer) private var dependencyContainer: any DIContainer
 
     var body: some View {
+        @Bindable var router = appRouter
         TabView(selection: $router.selectedTab) {
             Tab("Home", systemImage: "house.fill", value: .dashboard) {
                 AppCoordinatorView(path: $router.dashboardPath) {
@@ -29,10 +29,10 @@ struct RootTabView: View {
             }
         }
         .tint(.primaryColor)
-        .environment(router)
     }
 }
 
 #Preview {
     RootTabView()
+        .environment(AppRouter())
 }

@@ -8,6 +8,12 @@
 import os
 import SwiftUI
 
+enum AppRoot: Hashable {
+    case loading
+    case onboarding
+    case mainApp
+}
+
 enum AppTab: Hashable {
     case settings
     case dashboard
@@ -25,7 +31,7 @@ enum AppRoute: Hashable {
 @Observable
 final class AppRouter: Logging {
     // MARK: - Properties
-
+    var root: AppRoot = .loading
     var selectedTab: AppTab = .dashboard
 
     var dashboardPath = NavigationPath()
@@ -45,6 +51,14 @@ final class AppRouter: Logging {
             workoutPath.append(route)
         case .history:
             historyPath.append(route)
+        }
+    }
+    
+    func switchRoot(to newRoot: AppRoot) {
+        returnToRoot(to: .dashboard)
+        
+        withAnimation(.spring()) {
+            root = newRoot
         }
     }
 

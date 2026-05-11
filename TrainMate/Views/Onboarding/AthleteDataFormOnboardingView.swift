@@ -9,6 +9,7 @@ import SwiftUI
 import os
 
 struct AthleteDataFormOnboardingView: View, Logging {
+    @Environment(AppRouter.self) private var appRouter: AppRouter
     @State private var viewModel: AthleteDataFormOnboardingViewModel
 
     var body: some View {
@@ -74,7 +75,7 @@ struct AthleteDataFormOnboardingView: View, Logging {
                     VStack {
                         Button(action: { Task { try await viewModel.syncWithHealthKit() } }, label: {
                             HStack {
-                                if viewModel.isLoading {
+                                if viewModel.state == .loading {
                                     ProgressView()
                                         .tint(Color.backgroundColor)
                                         .padding(.trailing, .tmSpacing.small)
@@ -92,7 +93,7 @@ struct AthleteDataFormOnboardingView: View, Logging {
                             .background(Color.primaryColor)
                             .cornerRadius(.tmSpacing.medium)
                         })
-                        .disabled(viewModel.isLoading)
+                        .disabled(viewModel.state == .loading)
 
                         Divider().background(Color.dividerColor)
 
@@ -160,6 +161,11 @@ struct AthleteDataFormOnboardingView: View, Logging {
             Button(L10n.acknowledgeButtonTitle, role: .cancel) {}
         } message: { error in
             Text(error.localizedDescription)
+        }
+        .onChange(of: viewModel.state) {
+            if viewModel.state == .completed {
+                appRouter.switchRoot(to: .mainApp)
+            }
         }
     }
 
