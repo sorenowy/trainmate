@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2BB890C22FB3983F00A9D35B /* InlineSnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 2BB890C12FB3983F00A9D35B /* InlineSnapshotTesting */; };
+		2BB890C42FB3983F00A9D35B /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 2BB890C32FB3983F00A9D35B /* SnapshotTesting */; };
+		2BB890C62FB3983F00A9D35B /* SnapshotTestingCustomDump in Frameworks */ = {isa = PBXBuildFile; productRef = 2BB890C52FB3983F00A9D35B /* SnapshotTestingCustomDump */; };
 		2BFE113B2FA79B880038EAA9 /* .swiftformat in Resources */ = {isa = PBXBuildFile; fileRef = 2BFE113A2FA79B880038EAA9 /* .swiftformat */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +34,7 @@
 		2B64863C2F98AD4F0035CE44 /* TrainMate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrainMate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B64864D2F98AD500035CE44 /* TrainMateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrainMateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B6486572F98AD500035CE44 /* TrainMateUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrainMateUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BB890B72FB385FA00A9D35B /* Testing.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Testing.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/Testing.framework; sourceTree = DEVELOPER_DIR; };
 		2BFE11042FA6225D0038EAA9 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		2BFE11262FA626250038EAA9 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		2BFE11342FA649540038EAA9 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -80,6 +84,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BB890C62FB3983F00A9D35B /* SnapshotTestingCustomDump in Frameworks */,
+				2BB890C22FB3983F00A9D35B /* InlineSnapshotTesting in Frameworks */,
+				2BB890C42FB3983F00A9D35B /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +111,7 @@
 				2BFE113A2FA79B880038EAA9 /* .swiftformat */,
 				2BFE11042FA6225D0038EAA9 /* .swiftlint.yml */,
 				2BFE11342FA649540038EAA9 /* README.md */,
+				2BB890B42FB3858D00A9D35B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -115,6 +123,14 @@
 				2B6486572F98AD500035CE44 /* TrainMateUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		2BB890B42FB3858D00A9D35B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2BB890B72FB385FA00A9D35B /* Testing.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -161,6 +177,9 @@
 			);
 			name = TrainMateTests;
 			packageProductDependencies = (
+				2BB890C12FB3983F00A9D35B /* InlineSnapshotTesting */,
+				2BB890C32FB3983F00A9D35B /* SnapshotTesting */,
+				2BB890C52FB3983F00A9D35B /* SnapshotTestingCustomDump */,
 			);
 			productName = TrainMateTests;
 			productReference = 2B64864D2F98AD500035CE44 /* TrainMateTests.xctest */;
@@ -208,6 +227,7 @@
 					};
 					2B6486562F98AD500035CE44 = {
 						CreatedOnToolsVersion = 26.4.1;
+						LastSwiftMigration = 2640;
 						TestTargetID = 2B64863B2F98AD4F0035CE44;
 					};
 				};
@@ -227,6 +247,7 @@
 			packageReferences = (
 				2B86F72F2FA61AE000BE3980 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
 				2BFE11282FA643490038EAA9 /* XCRemoteSwiftPackageReference "SwiftFormat" */,
+				2BB890C02FB3983F00A9D35B /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 2B64863D2F98AD4F0035CE44 /* Products */;
@@ -549,6 +570,7 @@
 		2B6486692F98AD500035CE44 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = ZXRH85CXC5;
@@ -559,6 +581,8 @@
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -569,6 +593,7 @@
 		2B64866A2F98AD500035CE44 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = ZXRH85CXC5;
@@ -579,6 +604,7 @@
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -636,6 +662,14 @@
 				minimumVersion = 0.63.2;
 			};
 		};
+		2BB890C02FB3983F00A9D35B /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.19.2;
+			};
+		};
 		2BFE11282FA643490038EAA9 /* XCRemoteSwiftPackageReference "SwiftFormat" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/nicklockwood/SwiftFormat";
@@ -647,6 +681,21 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2BB890C12FB3983F00A9D35B /* InlineSnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2BB890C02FB3983F00A9D35B /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = InlineSnapshotTesting;
+		};
+		2BB890C32FB3983F00A9D35B /* SnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2BB890C02FB3983F00A9D35B /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTesting;
+		};
+		2BB890C52FB3983F00A9D35B /* SnapshotTestingCustomDump */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2BB890C02FB3983F00A9D35B /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTestingCustomDump;
+		};
 		2BFE11242FA625F50038EAA9 /* SwiftLintBuildToolPlugin */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 2B86F72F2FA61AE000BE3980 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */;
