@@ -31,6 +31,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2B02654D2FB4B13E00B3461A /* TrainMate.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TrainMate.xctestplan; sourceTree = "<group>"; };
 		2B64863C2F98AD4F0035CE44 /* TrainMate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrainMate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B64864D2F98AD500035CE44 /* TrainMateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrainMateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B6486572F98AD500035CE44 /* TrainMateUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrainMateUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -52,6 +53,11 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		2B2DB2FE2FB4DC0400E3D319 /* Packages */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Packages;
+			sourceTree = "<group>";
+		};
 		2B64863E2F98AD4F0035CE44 /* TrainMate */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -103,6 +109,8 @@
 		2B6486332F98AD4F0035CE44 = {
 			isa = PBXGroup;
 			children = (
+				2B2DB2FE2FB4DC0400E3D319 /* Packages */,
+				2B02654D2FB4B13E00B3461A /* TrainMate.xctestplan */,
 				2B64863E2F98AD4F0035CE44 /* TrainMate */,
 				2B6486502F98AD500035CE44 /* TrainMateTests */,
 				2B64865A2F98AD500035CE44 /* TrainMateUITests */,

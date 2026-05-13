@@ -1,0 +1,61 @@
+{
+  "configurations" : [
+    {
+      "id" : "40DEE840-89C3-40E1-AE5E-9BC838DF51CA",
+      "name" : "Poland (Metric)",
+      "options" : {
+        "language" : "pl",
+        "locationScenario" : {
+          "identifier" : "Warsaw, Poland",
+          "referenceType" : "built-in"
+        },
+        "maximumTestRepetitions" : 2,
+        "region" : "PL"
+      }
+    },
+    {
+      "id" : "7C0BA00A-3203-4D83-9D92-EB254B559F50",
+      "name" : "US (Imperial)",
+      "options" : {
+        "language" : "en",
+        "locationScenario" : {
+          "identifier" : "New York, NY, USA",
+          "referenceType" : "built-in"
+        },
+        "region" : "US"
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : {
+      "targets" : [
+        {
+          "containerPath" : "container:TrainMate.xcodeproj",
+          "identifier" : "2B64863B2F98AD4F0035CE44",
+          "name" : "TrainMate"
+        }
+      ]
+    },
+    "maximumTestExecutionTimeAllowance" : 60,
+    "maximumTestRepetitions" : 2,
+    "testRepetitionMode" : "fixedIterations",
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:TrainMate.xcodeproj",
+        "identifier" : "2B64864C2F98AD500035CE44",
+        "name" : "TrainMateTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Packages\/TMCore",
+        "identifier" : "TMCoreTests",
+        "name" : "TMCoreTests"
+      }
+    }
+  ],
+  "version" : 1
+}

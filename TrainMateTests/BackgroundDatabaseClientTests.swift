@@ -3,7 +3,7 @@ import SwiftData
 import Testing
 @testable import TrainMate
 
-@Suite("Background Database Operations")
+@Suite("[Unit] Background Database Operations")
 struct BackgroundDatabaseClientTests {
     let inMemoryContainer: ModelContainer
     let sut: BackgroundDatabaseClient

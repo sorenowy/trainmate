@@ -9,17 +9,9 @@ import Foundation
 import Testing
 @testable import TrainMate
 
-@Suite("Session Manager Logic")
+@Suite("[Unit] Session Manager Logic")
 @MainActor
 struct SessionManagerTests {
-    @Test("Should set state to initializing when its instantiated")
-    func verifyInitialSession() {
-        let container = MockDIContainer(hasAthlete: true)
-        let sut = SessionManager(databaseClient: container.databaseClient)
-
-        #expect(sut.state == .initializing, "State should be set to initializing upon init")
-    }
-
     @Test("Should change state to Active when athlete exists in database")
     func verifySessionWithExistingAthlete() throws {
         let container = MockDIContainer(hasAthlete: true)

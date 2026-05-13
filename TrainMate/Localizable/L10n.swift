@@ -21,7 +21,9 @@ enum L10n {
         static let onboardingPageThreeDescription = LocalizedStringResource("app.onboarding.description.three")
         
         static let onboardingAthletePageTitle = LocalizedStringResource("app.onboarding.athlete.title")
-        static let onboardingAthletePagePersonalDataTitle = LocalizedStringResource("app.onboarding.athlete.personalData.title")
+        static let onboardingAthletePagePersonalDataTitle = LocalizedStringResource(
+            "app.onboarding.athlete.personalData.title"
+        )
         static let onboardingAthletePageNameLabel = LocalizedStringResource("app.onboarding.athlete.name")
         static let onboardingAthleteWeightLabel = LocalizedStringResource("app.onboarding.athlete.weight.label")
         static let onboardingAthleteHeightLabel = LocalizedStringResource("app.onboarding.athlete.height.label")

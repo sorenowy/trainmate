@@ -10,7 +10,7 @@ import SwiftData
 import Testing
 @testable import TrainMate
 
-@Suite("Database Client Operations")
+@Suite("[Unit] Database Client Operations")
 @MainActor
 struct DatabaseClientTests {
     let inMemoryContainer: ModelContainer

@@ -3,27 +3,34 @@ import SwiftUI
 import Testing
 @testable import TrainMate
 
-@Suite("OnboardingView Snapshot Tests")
+@Suite("[Snapshot] OnboardingView Snapshot Tests")
 @MainActor
 final class OnboardingViewSnapshotTests {
     
     let mockDIContainer = MockDIContainer()
     let appRouter = AppRouter()
     
+    struct SnapshotConfig {
+        let style: UIUserInterfaceStyle
+        let locale: Locale
+        let snapshotName: String
+    }
+    
     @Test(
         "Shows initial onboarding page",
         arguments: [
-            (UIUserInterfaceStyle.dark, "DarkMode"),
-            (UIUserInterfaceStyle.light, "LightMode")
+            SnapshotConfig(style: .light, locale: Locale(identifier: "pl_PL"), snapshotName: "LightMode_PL"),
+            SnapshotConfig(style: .dark, locale: Locale(identifier: "en_US"), snapshotName: "DarkMode_US")
         ]
     )
-    func onboardingPageRootView(style: UIUserInterfaceStyle, snapshotName: String) {
+    func onboardingPageRootView(config: SnapshotConfig) {
         let view = OnboardingView()
             .environment(\.diContainer, mockDIContainer)
             .environment(appRouter)
+            .environment(\.locale, config.locale)
         
         let viewController = UIHostingController(rootView: view)
                 
-        assertSnapshot(of: viewController, as: .image(on: .iPhone13Pro, traits: .init(userInterfaceStyle: style)), named: snapshotName)
+        assertSnapshot(of: viewController, as: .image(on: .iPhone13Pro, traits: .init(userInterfaceStyle: config.style)), named: config.snapshotName)
     }
 }
