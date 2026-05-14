@@ -1,5 +1,5 @@
 //
-//  ErrorView.swift
+//  ErrorModalView.swift
 //  TrainMate
 //
 //  Created by Hubert Kuszyński on 10/05/2026.

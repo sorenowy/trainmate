@@ -31,6 +31,7 @@ enum AppRoute: Hashable {
 @Observable
 final class AppRouter: Logging {
     // MARK: - Properties
+
     var root: AppRoot = .loading
     var selectedTab: AppTab = .dashboard
 
@@ -53,10 +54,10 @@ final class AppRouter: Logging {
             historyPath.append(route)
         }
     }
-    
+
     func switchRoot(to newRoot: AppRoot) {
         returnToRoot(to: .dashboard)
-        
+
         withAnimation(.spring()) {
             root = newRoot
         }

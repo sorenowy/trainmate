@@ -11,7 +11,7 @@ let package = Package(
         .library(
             name: "TMCore",
             targets: ["TMCore"]
-        ),
+        )
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -24,7 +24,7 @@ let package = Package(
             name: "TMCoreTests",
             dependencies: ["TMCore"],
             path: "Tests/TMCoreTests"
-        ),
+        )
     ],
     swiftLanguageModes: [.v6]
 )

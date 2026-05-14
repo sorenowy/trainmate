@@ -26,7 +26,7 @@ struct MainView: View {
         }
         // TODO: If going with iPadOS/macOS, there we shift towards other UI
     }
-    
+
     private func verifySessionAndRoute() {
         if dependencyContainer.sessionManager.state == .noAthlete {
             router.switchRoot(to: .onboarding)

@@ -6,21 +6,20 @@ import SwiftUI
 @Observable
 @MainActor
 final class AthleteDataFormOnboardingViewModel: Logging {
-    
     enum State {
         case idle
         case loading
         case completed
         case error
     }
-    
+
     private let readDatabaseClient: any DatabaseClientProtocol
     private let writeDatabaseClient: any BackgroundDatabaseClientProtocol
     private let healthKitClient: any HealthKitClientProtocol
     private let userSettings: any UserSettingsProtocol
     private let sessionManager: SessionManager
     private(set) var state = State.idle
-    
+
     var athlete: Athlete = .init()
     var isHealthKitSynced: Bool = false
     var isLoading: Bool = false
@@ -28,7 +27,7 @@ final class AthleteDataFormOnboardingViewModel: Logging {
     var error: Error?
 
     var isReady: Bool {
-        !athlete.name.isEmpty && isHealthKitSynced && !isLoading
+        !athlete.name.isEmpty
     }
 
     init(
@@ -80,10 +79,10 @@ final class AthleteDataFormOnboardingViewModel: Logging {
             Logger.app.error("[\(self.typeName)] failed to fetch biometric data: \(error.localizedDescription)]")
         }
     }
-    
+
     func finishAthleteSetup() async {
         withAnimation { state = .loading }
-        
+
         do {
             try readDatabaseClient.insert(athlete)
             Logger.database.info("[\(self.typeName)] successfully inserted athlete")
@@ -99,7 +98,8 @@ final class AthleteDataFormOnboardingViewModel: Logging {
     }
 
     @concurrent private func callHealthKitClient() async throws
-        -> HealthKitData? {
+        -> HealthKitData?
+    {
         let authorized = try await healthKitClient.requestAuthorization()
 
         if authorized {

@@ -32,7 +32,9 @@ final class HealthKitClient: HealthKitClientProtocol {
             HKObjectType.quantityType(forIdentifier: .bodyMass)!,
             HKObjectType.quantityType(forIdentifier: .height)!,
             HKObjectType.characteristicType(forIdentifier: .biologicalSex)!,
-            HKObjectType.characteristicType(forIdentifier: .dateOfBirth)!
+            HKObjectType.characteristicType(forIdentifier: .dateOfBirth)!,
+            HKObjectType.quantityType(forIdentifier: .vo2Max)!,
+            HKObjectType.quantityType(forIdentifier: .cyclingFunctionalThresholdPower)!
         ]
 
         try await healthStore.requestAuthorization(toShare: [], read: typesToLoad)
@@ -48,13 +50,30 @@ final class HealthKitClient: HealthKitClientProtocol {
         async let weightQuantity = fetchLatestQuantitySample(for: .bodyMass)
         async let heightQuantity = fetchLatestQuantitySample(for: .height)
 
+        async let vo2MaxQuantity = fetchLatestQuantitySample(for: .vo2Max)
+        async let ftpQuantity = fetchLatestQuantitySample(for: .cyclingFunctionalThresholdPower)
+
         let weight: Double? = try await weightQuantity?.doubleValue(for: .gramUnit(with: .kilo))
         let height: Double? = try await heightQuantity?.doubleValue(for: .meter())
+        let vo2Max: Double? = try await vo2MaxQuantity?.doubleValue(for: .literUnit(with: .milli))
+        let ftp: Double? = try await ftpQuantity?.doubleValue(for: .watt())
+
         guard let healthKitSex = biologicalSex else {
-            throw NSError(domain: "TrainMate", code: 1, userInfo: [NSLocalizedDescriptionKey: "Failed to retrieve biological sex"])
+            throw NSError(
+                domain: "TrainMate",
+                code: 1,
+                userInfo: [NSLocalizedDescriptionKey: "Failed to retrieve biological sex"]
+            )
         }
 
-        return HealthKitData(biologicalSex: UserSex(rawValue: healthKitSex.rawValue) ?? .notSet, dateOfBirth: birthDate, height: height, weight: weight)
+        return HealthKitData(
+            biologicalSex: UserSex(rawValue: healthKitSex.rawValue) ?? .notSet,
+            dateOfBirth: birthDate,
+            height: height,
+            weight: weight,
+            ftp: ftp,
+            vo2Max: vo2Max
+        )
     }
 
     // MARK: - Private helpers

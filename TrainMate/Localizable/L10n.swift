@@ -19,7 +19,7 @@ enum L10n {
         static let onboardingPageOneDescription = LocalizedStringResource("app.onboarding.description.one")
         static let onboardingPageTwoDescription = LocalizedStringResource("app.onboarding.description.two")
         static let onboardingPageThreeDescription = LocalizedStringResource("app.onboarding.description.three")
-        
+
         static let onboardingAthletePageTitle = LocalizedStringResource("app.onboarding.athlete.title")
         static let onboardingAthletePagePersonalDataTitle = LocalizedStringResource(
             "app.onboarding.athlete.personalData.title"
@@ -33,10 +33,13 @@ enum L10n {
         static let onboardingAthleteDateLabel = LocalizedStringResource("app.onboarding.athlete.date")
         static let onboardingAthleteMetricsTitle = LocalizedStringResource("app.onboarding.athlete.metrics.title")
         static let onboardingAthleteSexLabel = LocalizedStringResource("app.onboarding.athlete.sex.title")
+        static let onboardingAthleteVO2MaxLabel = LocalizedStringResource("app.onboarding.athlete.vo2Max.title")
+        static let onboardingAthleteFTPLabel = LocalizedStringResource("app.onboarding.athlete.ftp.title")
     }
 
     static let appTitle = LocalizedStringResource("app.title")
-    
+
     // MARK: Buttons
+
     static let acknowledgeButtonTitle: LocalizedStringResource = "app.button.acknowledged"
 }

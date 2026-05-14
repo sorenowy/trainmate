@@ -12,7 +12,7 @@ final class UserSettings: UserSettingsProtocol {
 
 final class MockUserSettings: UserSettingsProtocol {
     var didCallFinishOnboarding: Bool = false
-    
+
     func finishOnboarding() {
         didCallFinishOnboarding = true
     }
