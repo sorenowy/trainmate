@@ -11,7 +11,7 @@ public enum MeasurementConverter {
     }
     
     public static var localHeightUnit: UnitLength {
-        Locale.current.measurementSystem == .us ? .feet : .meters
+        Locale.current.measurementSystem == .us ? .feet : .centimeters
     }
     
     public static var localWeightunit: UnitMass {

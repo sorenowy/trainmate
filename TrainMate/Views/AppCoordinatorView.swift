@@ -32,9 +32,11 @@ struct AppCoordinatorView<Content: View>: View {
 
 #Preview("Dashboard - Start") {
     @Previewable @State var path = NavigationPath()
+    
+    let container = MockDIContainer()
 
     AppCoordinatorView(path: $path) {
-        DashboardView()
+        DashboardView(viewModel: DashboardViewModel(databaseClient: container.databaseClient))
     }
     .environment(AppRouter())
 }

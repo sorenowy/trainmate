@@ -15,6 +15,7 @@ struct HealthKitData {
     var weight: Double?
     var ftp: Double?
     var vo2Max: Double?
+    var hrv: Double?
 }
 
 extension UserSex {

@@ -45,6 +45,7 @@ struct OnboardingView: View {
 }
 
 #Preview {
+    let appRouter = AppRouter()
     OnboardingView()
-        .modelContainer(.previewContainer)
+        .environment(appRouter)
 }

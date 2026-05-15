@@ -20,4 +20,26 @@ struct MeasurementConverterTests {
             #expect(formattedDistance.contains("5"), "Converter failed to keep it as KM")
         }
     }
+    
+    @Test("Determining local mass unit based on system")
+    func localMassUnitResolution() {
+        let isUS = Locale.current.measurementSystem == .us
+        
+        if isUS {
+            #expect(MeasurementConverter.localWeightunit == .pounds)
+        } else {
+            #expect(MeasurementConverter.localWeightunit == .kilograms)
+        }
+    }
+    
+    @Test("Determining local height/length unit based on system")
+    func localHeightUnitResolution() {
+        let isUS = Locale.current.measurementSystem == .us
+        
+        if isUS {
+            #expect(MeasurementConverter.localHeightUnit == .feet)
+        } else {
+            #expect(MeasurementConverter.localHeightUnit == .centimeters)
+        }
+    }
 }

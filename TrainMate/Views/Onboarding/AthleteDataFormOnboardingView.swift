@@ -219,6 +219,7 @@ struct AthleteDataFormOnboardingView: View, Logging {
 
 #Preview {
     let container = MockDIContainer()
+    let appRouter = AppRouter()
     AthleteDataFormOnboardingView(viewModel: AthleteDataFormOnboardingViewModel(
         readDatabaseClient: container.databaseClient,
         writeDatabaseClient: container.backgroundDatabaseClient,
@@ -226,4 +227,5 @@ struct AthleteDataFormOnboardingView: View, Logging {
         userSettings: container.userSettings,
         sessionManager: container.sessionManager
     ))
+    .environment(appRouter)
 }

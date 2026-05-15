@@ -9,7 +9,7 @@ struct RootTabView: View {
         TabView(selection: $router.selectedTab) {
             Tab("Home", systemImage: "house.fill", value: .dashboard) {
                 AppCoordinatorView(path: $router.dashboardPath) {
-                    DashboardView()
+                    DashboardView(viewModel: DashboardViewModel(databaseClient: dependencyContainer.databaseClient))
                 }
             }
             Tab("Workout", systemImage: "figure.strengthtraining.functional.circle.fill", value: .workout) {

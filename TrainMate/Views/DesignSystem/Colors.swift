@@ -5,7 +5,7 @@ extension Color {
 
     static let primaryColor = Color("TMPrimaryColor")
     static let secondaryColor = Color("TMSecondaryColor")
-    static let TertiaryColor = Color("TertiaryColor")
+    static let tertiaryColor = Color("TertiaryColor")
 
     // MARK: - Action Colors
 

@@ -34,7 +34,8 @@ final class HealthKitClient: HealthKitClientProtocol {
             HKObjectType.characteristicType(forIdentifier: .biologicalSex)!,
             HKObjectType.characteristicType(forIdentifier: .dateOfBirth)!,
             HKObjectType.quantityType(forIdentifier: .vo2Max)!,
-            HKObjectType.quantityType(forIdentifier: .cyclingFunctionalThresholdPower)!
+            HKObjectType.quantityType(forIdentifier: .cyclingFunctionalThresholdPower)!,
+            HKObjectType.quantityType(forIdentifier: .heartRateVariabilitySDNN)!
         ]
 
         try await healthStore.requestAuthorization(toShare: [], read: typesToLoad)
@@ -52,10 +53,12 @@ final class HealthKitClient: HealthKitClientProtocol {
 
         async let vo2MaxQuantity = fetchLatestQuantitySample(for: .vo2Max)
         async let ftpQuantity = fetchLatestQuantitySample(for: .cyclingFunctionalThresholdPower)
+        async let hrvQuantity = fetchLatestQuantitySample(for: .heartRateVariabilitySDNN)
 
         let weight: Double? = try await weightQuantity?.doubleValue(for: .gramUnit(with: .kilo))
         let height: Double? = try await heightQuantity?.doubleValue(for: .meter())
         let vo2Max: Double? = try await vo2MaxQuantity?.doubleValue(for: .literUnit(with: .milli))
+        let hrv: Double? = try await hrvQuantity?.doubleValue(for: HKUnit(from: "ms"))
         let ftp: Double? = try await ftpQuantity?.doubleValue(for: .watt())
 
         guard let healthKitSex = biologicalSex else {
@@ -72,7 +75,8 @@ final class HealthKitClient: HealthKitClientProtocol {
             height: height,
             weight: weight,
             ftp: ftp,
-            vo2Max: vo2Max
+            vo2Max: vo2Max,
+            hrv: hrv
         )
     }
 

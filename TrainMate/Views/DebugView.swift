@@ -8,7 +8,7 @@
 import SwiftData
 import SwiftUI
 
-struct DashboardView: View {
+struct DebugView: View {
     @Environment(AppRouter.self) private var router
     @Environment(\.diContainer) private var dependencyContainer: any DIContainer
 
@@ -65,6 +65,7 @@ struct DashboardView: View {
 }
 
 #Preview {
-    DashboardView()
+    let container = MockDIContainer()
+    DashboardView(viewModel: DashboardViewModel(databaseClient: container.databaseClient))
         .environment(AppRouter())
 }
